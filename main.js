@@ -1,16 +1,27 @@
-import { ipcMain } from 'electron'; // eslint-disable-line
-import menubar from 'menubar';
+import { Tray, ipcMain } from 'electron'; // eslint-disable-line
+import Menubar from 'menubar';
+import osxPrefs from 'electron-osx-appearance';
+import settings from 'electron-settings';
 import brightness from 'brightness';
 
 import EVENTS from './events';
 
-menubar({
+const getVibrancy = () => (osxPrefs.isDarkMode() ? 'ultra-dark' : 'light');
+
+const menubar = Menubar({
   dir: __dirname,
   width: 200,
   height: 50,
   preloadWindow: true,
-  // width: 500,
-  // height: 500,
+  icon: 'iconTemplate.png',
+  vibrancy: getVibrancy(),
+});
+
+settings.set('isDarkMode', osxPrefs.isDarkMode());
+
+osxPrefs.onDarkModeChanged(() => {
+  menubar.window.setVibrancy(getVibrancy());
+  settings.set('isDarkMode', osxPrefs.isDarkMode());
 });
 
 // adds debug features like hotkeys for triggering dev tools and reload

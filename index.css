@@ -8,16 +8,25 @@ body {
 	padding: 23px;
 }
 
-.noUi-base, .noUi-target {
-	height: 3px;
+body.dark-mode .noUi-connect {
+	background: #B4B4B4;
+}
+
+body.dark-mode .noUi-base, body.dark-mode .noUi-target {
 	background: #606060;
-	border-radius: 5px;
+}
+
+.noUi-base, .noUi-target {
+	height: 4px;
+	background: #B4B4B4;
+	border-radius: 10px;
+	border-width: 0px;
 }
 
 .noUi-connect {
-	height: 3px;
-	background: #B4B4B4;
-	border-color: #B4B4B4;
+	height: 4px;
+	background: #6598EE;
+	border-color: #6598EE;
 }
 
 .noUi-horizontal .noUi-handle {
