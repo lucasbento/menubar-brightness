@@ -1,40 +1,38 @@
-'use strict';
-const electron = require('electron');
-const menubar = require('menubar');
+import { ipcRenderer, remote } from 'electron'; // eslint-disable-line
+import noUiSlider from 'nouislider';
 
-const app = electron.app;
-const menu = menubar();
+import EVENTS from './events';
 
-// adds debug features like hotkeys for triggering dev tools and reload
-require('electron-debug')();
+const el = document.getElementById('range');
 
-// prevent window being garbage collected
-let mainWindow;
+const requestBrightnessValue = () => ipcRenderer.send(EVENTS.REQUEST_INITIAL_VALUE);
 
-function onClosed() {
-	// dereference the window
-	// for multiple windows store them in an array
-	mainWindow = null;
-}
+const handleChangeBrightness = (values, handle) => {
+  ipcRenderer.send(EVENTS.CHANGE_VALUE, values[handle]);
+};
 
-function createMainWindow() {
-	menu.app.on('closed', onClosed);
+const updateSlider = (value) => {
+  if (el.noUiSlider) {
+    return el.noUiSlider.set(value);
+  }
 
-	return menu.app;
-}
+  noUiSlider.create(el, {
+    start: value,
+    behaviour: 'drag',
+    connect: [true, false],
+    range: {
+      min: 0,
+      max: 100,
+    },
+  });
 
-menu.app.on('window-all-closed', () => {
-	if (process.platform !== 'darwin') {
-		app.quit();
-	}
-});
+  el.noUiSlider.on('update', handleChangeBrightness);
+};
 
-menu.app.on('activate', () => {
-	if (!mainWindow) {
-		mainWindow = createMainWindow();
-	}
-});
+remote.getCurrentWindow().on('show', () => requestBrightnessValue());
 
-menu.app.on('ready', () => {
-	mainWindow = createMainWindow();
-});
+ipcRenderer.on(EVENTS.GET_INITIAL_VALUE, (event, value) => updateSlider(value));
+
+requestBrightnessValue();
+
+el.addEventListener('input', handleChangeBrightness);
