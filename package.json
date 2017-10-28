@@ -1,6 +1,7 @@
 {
   "name": "menubar-brightness",
   "description": "My wicked app",
+  "productName": "Menubar Brightness",
   "version": "0.0.0",
   "author": {
     "name": "Lucas Bento",
@@ -15,6 +16,7 @@
         ]
       },
       "electronPackagerConfig": {
+        "icon": "./src/icon.icns",
         "extendInfo": {
           "LSUIElement": 1
         }
@@ -26,6 +28,7 @@
     }
   },
   "dependencies": {
+    "auto-launch": "^5.0.1",
     "brightness": "^3.0.0",
     "electron-compile": "^6.4.2",
     "electron-debug": "^1.0.0",
@@ -56,7 +59,6 @@
   ],
   "license": "MIT",
   "main": "./src/main.js",
-  "productName": "MenubarBrightness",
   "repository": "lucasbento/menubar-brightness",
   "scripts": {
     "lint": "eslint .",

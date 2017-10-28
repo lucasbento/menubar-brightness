@@ -1,25 +1,32 @@
 import { Tray, ipcMain } from 'electron'; // eslint-disable-line
+import AutoLaunch from 'auto-launch';
 import Menubar from 'menubar';
 import path from 'path';
 import osxPrefs from 'electron-osx-appearance';
 import settings from 'electron-settings';
 import brightness from 'brightness';
 
+import pkg from '../package.json';
 import EVENTS from './events';
 
 const getVibrancy = () => (osxPrefs.isDarkMode() ? 'ultra-dark' : 'light');
 const parseValue = (value, origin = 'range') => ((origin === 'range') ? value / 100 : value * 100);
+
+const autoLauncher = new AutoLaunch({
+  name: pkg.productName,
+});
 
 const menubar = Menubar({
   dir: __dirname,
   width: 200,
   height: 50,
   preloadWindow: true,
+  resizable: false,
   icon: path.join(__dirname, 'iconTemplate.png'),
   vibrancy: getVibrancy(),
 });
 
-const init = () => {
+const init = async () => {
   settings.set('isDarkMode', osxPrefs.isDarkMode());
 
   osxPrefs.onDarkModeChanged(() => {
@@ -35,6 +42,11 @@ const init = () => {
 
   ipcMain.on(EVENTS.CHANGE_VALUE, (event, brightnessValue) =>
     brightness.set(parseValue(brightnessValue)));
+
+  const isAutolauncherEnabled = await autoLauncher.isEnabled();
+  if (!isAutolauncherEnabled) {
+    autoLauncher.enable();
+  }
 };
 
 init();
