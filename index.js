@@ -4,22 +4,14 @@ import noUiSlider from 'nouislider';
 
 import EVENTS from './events';
 
-// TODO: wrap stuff in a function
 const { body } = document;
 const el = document.getElementById('range');
 
 const handleDarkMode = isDarkMode =>
-  (isDarkMode ? body.classList.add('dark-mode') : body.classList.remove('dark-mode'));
-
-settings.watch('isDarkMode', isDarkMode => handleDarkMode(isDarkMode));
-
-const init = () => {
-  const isDarkMode = settings.get('isDarkMode');
-
-  handleDarkMode(isDarkMode);
-};
-
-init();
+  (isDarkMode ?
+    body.classList.add('dark-mode') :
+    body.classList.remove('dark-mode')
+  );
 
 const requestBrightnessValue = () => ipcRenderer.send(EVENTS.REQUEST_INITIAL_VALUE);
 
@@ -45,10 +37,16 @@ const updateSlider = (value) => {
   el.noUiSlider.on('update', handleChangeBrightness);
 };
 
-remote.getCurrentWindow().on('show', () => requestBrightnessValue());
+const init = () => {
+  handleDarkMode(settings.get('isDarkMode'));
+  requestBrightnessValue();
 
-ipcRenderer.on(EVENTS.GET_INITIAL_VALUE, (event, value) => updateSlider(value));
+  settings.watch('isDarkMode', isDarkMode => handleDarkMode(isDarkMode));
+  remote.getCurrentWindow().on('show', () => requestBrightnessValue());
 
-requestBrightnessValue();
+  ipcRenderer.on(EVENTS.GET_INITIAL_VALUE, (event, value) => updateSlider(value));
 
-el.addEventListener('input', handleChangeBrightness);
+  el.addEventListener('input', handleChangeBrightness);
+};
+
+init();
