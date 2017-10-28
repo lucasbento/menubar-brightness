@@ -1,5 +1,6 @@
 import { Tray, ipcMain } from 'electron'; // eslint-disable-line
 import Menubar from 'menubar';
+import path from 'path';
 import osxPrefs from 'electron-osx-appearance';
 import settings from 'electron-settings';
 import brightness from 'brightness';
@@ -14,7 +15,7 @@ const menubar = Menubar({
   width: 200,
   height: 50,
   preloadWindow: true,
-  icon: 'iconTemplate.png',
+  icon: path.join(__dirname, 'iconTemplate.png'),
   vibrancy: getVibrancy(),
 });
 
