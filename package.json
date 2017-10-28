@@ -7,6 +7,24 @@
     "email": "lucas.bsilva@outlook.com",
     "url": "github.com/lucasbento"
   },
+  "config": {
+    "forge": {
+      "make_targets": {
+        "darwin": [
+          "dmg"
+        ]
+      },
+      "electronPackagerConfig": {
+        "extendInfo": {
+          "LSUIElement": 1
+        }
+      },
+      "github_repository": {
+        "owner": "lucasbento",
+        "name": "menubar-brightness"
+      }
+    }
+  },
   "dependencies": {
     "brightness": "^3.0.0",
     "electron-compile": "^6.4.2",
@@ -42,28 +60,8 @@
   "repository": "lucasbento/menubar-brightness",
   "scripts": {
     "lint": "eslint .",
-    "start": "electron-forge start",
-    "test": "xo",
+    "make": "electron-forge make",
     "package": "electron-forge package --platform=darwin",
-    "make": "electron-forge make"
-  },
-  "config": {
-    "forge": {
-      "make_targets": {
-        "darwin": [
-          "dmg"
-        ]
-      },
-      "electronPackagerConfig": {
-        "outDir": "./dist",
-        "extendInfo": {
-          "LSUIElement": 1
-        }
-      },
-      "github_repository": {
-        "owner": "lucasbento",
-        "name": "menubar-brightness"
-      }
-    }
+    "start": "electron-forge start"
   }
 }
