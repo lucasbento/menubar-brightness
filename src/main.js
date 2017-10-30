@@ -16,13 +16,14 @@ const autoLauncher = new AutoLaunch({
   name: pkg.productName,
 });
 
+// TODO: find out about small icon in login items
 const menubar = Menubar({
-  dir: __dirname,
+  dir: `${__dirname}/renderer`,
   width: 200,
   height: 50,
   preloadWindow: true,
   resizable: false,
-  icon: path.join(__dirname, 'iconTemplate.png'),
+  icon: path.join(__dirname, 'icons/iconTemplate.png'),
   vibrancy: getVibrancy(),
 });
 

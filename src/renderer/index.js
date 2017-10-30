@@ -2,7 +2,7 @@ import { ipcRenderer, remote } from 'electron'; // eslint-disable-line
 import settings from 'electron-settings';
 import noUiSlider from 'nouislider';
 
-import EVENTS from './events';
+import EVENTS from '../events';
 
 const { body } = document;
 const el = document.getElementById('range');

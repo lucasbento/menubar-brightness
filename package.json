@@ -16,7 +16,7 @@
         ]
       },
       "electronPackagerConfig": {
-        "icon": "./src/icon.icns",
+        "icon": "./src/icons/icon.icns",
         "extendInfo": {
           "LSUIElement": 1
         }
@@ -51,7 +51,7 @@
     "eslint-plugin-import": "^2.8.0"
   },
   "files": [
-    "./src/*"
+    "./src/**/*"
   ],
   "keywords": [
     "electron",
