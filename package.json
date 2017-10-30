@@ -1,12 +1,12 @@
 {
   "name": "menubar-brightness",
-  "description": "My wicked app",
+  "description": "Change your brightness from the menubar",
   "productName": "Menubar Brightness",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "author": {
     "name": "Lucas Bento",
     "email": "lucas.bsilva@outlook.com",
-    "url": "github.com/lucasbento"
+    "url": "https://github.com/lucasbento"
   },
   "config": {
     "forge": {
@@ -19,7 +19,8 @@
         "icon": "./src/icons/icon.icns",
         "extendInfo": {
           "LSUIElement": 1
-        }
+        },
+        "packageManager": "yarn"
       },
       "github_repository": {
         "owner": "lucasbento",
@@ -28,7 +29,7 @@
     }
   },
   "dependencies": {
-    "auto-launch": "^5.0.1",
+    "auto-launch": "lucasbento/node-auto-launch",
     "brightness": "^3.0.0",
     "electron-compile": "^6.4.2",
     "electron-debug": "^1.0.0",
@@ -55,11 +56,22 @@
   ],
   "keywords": [
     "electron",
-    "electron-app"
+    "electron-app",
+    "brightness",
+    "menubar",
+    "mac",
+    "macOS",
+    "osx"
   ],
   "license": "MIT",
   "main": "./src/main.js",
-  "repository": "lucasbento/menubar-brightness",
+  "bugs": {
+    "url": "https://github.com/lucasbento/menubar-brightness/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/lucasbento/menubar-brightness"
+  },
   "scripts": {
     "lint": "eslint .",
     "make": "electron-forge make",
