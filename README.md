@@ -1,32 +1,11 @@
-# menubar-brightness
+<p align="center">
+  <img alt="Menubar Brightness" title="Menubar Brightness" src="./media/logo.png" width="250" />
+</p>
 
-> My wicked app
-
-
-## References
-
-- https://github.com/kevva/brightness
-- Hide dock icon as default (https://github.com/electron/electron/issues/422#issuecomment-293518966)
-
-## Dev
-
-```
-$ npm install
-```
-
-### Run
-
-```
-$ npm start
-```
-
-### Build
-
-```
-$ npm run build
-```
-
-Builds the app for macOS, Linux, and Windows, using [electron-packager](https://github.com/electron-userland/electron-packager).
+<h1 align="center">Menubar Brightness</h1>
+<p align="center">
+  Change your brightness from the menubar.
+</p>
 
 
 ## License
