@@ -16,7 +16,6 @@ const autoLauncher = new AutoLaunch({
   name: pkg.productName,
 });
 
-// TODO: find out about small icon in login items
 const menubar = Menubar({
   dir: `${__dirname}/renderer`,
   width: 200,
