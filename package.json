@@ -9,24 +9,7 @@
     "url": "https://github.com/lucasbento"
   },
   "config": {
-    "forge": {
-      "make_targets": {
-        "darwin": [
-          "dmg"
-        ]
-      },
-      "electronPackagerConfig": {
-        "icon": "./src/icons/icon.icns",
-        "extendInfo": {
-          "LSUIElement": 1
-        },
-        "packageManager": "yarn"
-      },
-      "github_repository": {
-        "owner": "lucasbento",
-        "name": "menubar-brightness"
-      }
-    }
+    "forge": "./forge.config.js"      
   },
   "dependencies": {
     "auto-launch": "lucasbento/node-auto-launch",

@@ -22,7 +22,7 @@ const menubar = Menubar({
   height: 50,
   preloadWindow: true,
   resizable: false,
-  icon: path.join(__dirname, 'icons/iconTemplate.png'),
+  icon: path.join(__dirname, 'assets/iconTemplate.png'),
   vibrancy: getVibrancy(),
 });
 
