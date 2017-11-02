@@ -8,7 +8,7 @@
 </p>
 
 <p align="center">
-  <img alt="Menubar Brightness" title="Menubar Brightness" src="./media/usage.gif" />
+  <img alt="Menubar Brightness" title="Menubar Brightness" src="./media/usage.gif" height="140" />
 </p>
 
 ## Installation
