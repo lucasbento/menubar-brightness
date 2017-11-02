@@ -4,10 +4,20 @@
 
 <h1 align="center">Menubar Brightness</h1>
 <p align="center">
-  Change your brightness from the menubar.
+  MacOS app to change your brightness from the menubar.
 </p>
 
+<p align="center">
+  <img alt="Menubar Brightness" title="Menubar Brightness" src="./media/usage.gif" />
+</p>
+
+## Installation
+
+[Download the latest release][latest-release] (macOS only)
 
 ## License
 
-MIT © [Lucas Bento](https://github.com/lucasbento)
+MIT © [Lucas Bento][github-profile]
+
+[latest-release]: https://github.com/lucasbento/menubar-brightness/releases/latest
+[github-profile]: https://github.com/lucasbento
