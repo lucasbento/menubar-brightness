@@ -1,13 +1,8 @@
-const electron = require('electron-compile')
 
 const { productName } = require('./package.json');
 const path = require('path');
 
-console.log('HEYYAHEYHYEHAHE', electron)
-
-
-const dir = process.cwd();
-const outPath = path.resolve(dir, 'out/make', `${productName}.dmg`);
+const appPath = path.resolve(process.cwd(), `out/${productName}-darwin-x64/${productName}.app`);
 
 module.exports = {
   make_targets: {
@@ -27,14 +22,14 @@ module.exports = {
     name: 'menubar-brightness',
   },
   electronInstallerDMG: {
-    iconSize: 160,
+    'icon-size': 160,
     background: './src/assets/background.png',
     contents: [
       {
         x: 180,
         y: 170,
         type: 'file',
-        path: outPath,
+        path: appPath,
       },
       {
         x: 480,
