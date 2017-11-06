@@ -36,7 +36,7 @@ const updateSlider = (value) => {
     },
   });
 
-  el.noUiSlider.on('update', handleChangeBrightness);
+  return el.noUiSlider.on('update', handleChangeBrightness);
 };
 
 const init = () => {

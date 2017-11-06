@@ -80,7 +80,7 @@ const init = async () => {
       message: `Are you sure you want to close ${pkg.productName}?`,
     }, (response) => {
       if (response === 0) {
-        return menubar.app.quit();
+        menubar.app.quit();
       }
     });
   });
