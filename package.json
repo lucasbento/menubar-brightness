@@ -56,7 +56,7 @@
     "url": "https://github.com/lucasbento/menubar-brightness"
   },
   "scripts": {
-    "lint": "eslint .",
+    "lint": "eslint src",
     "make": "electron-forge make",
     "package": "electron-forge package --platform=darwin",
     "start": "electron-forge start"
