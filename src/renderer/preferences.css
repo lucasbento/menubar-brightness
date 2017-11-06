@@ -1,7 +1,18 @@
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 body {
   background-color: #ECECEC;
   margin-top: 10px;
   font-size: 12px;
+  -webkit-user-select: none;
+  animation: fadein 0.5s;
 }
 
 .checkbox-container {
