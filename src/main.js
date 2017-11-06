@@ -1,4 +1,4 @@
-import { Tray, ipcMain, BrowserWindow } from 'electron'; // eslint-disable-line
+import { Tray, ipcMain, BrowserWindow, dialog } from 'electron'; // eslint-disable-line
 import AutoLaunch from 'auto-launch';
 import Menubar from 'menubar';
 import path from 'path';
@@ -32,6 +32,7 @@ require('electron-debug')({
 });
 
 let preferencesWindow = null;
+let showExitPrompt = true;
 
 const openPreferencesWindow = () => {
   if (preferencesWindow) {
@@ -83,6 +84,27 @@ const init = async () => {
   osxPrefs.onDarkModeChanged(() => {
     menubar.window.setVibrancy(getVibrancy());
     settings.set('isDarkMode', osxPrefs.isDarkMode());
+  });
+
+  menubar.app.on('before-quit', (event) => {
+    if (!showExitPrompt) {
+      return;
+    }
+
+    event.preventDefault();
+
+    dialog.showMessageBox({
+      type: 'question',
+      buttons: ['Yes', 'No'],
+      title: `Quit ${pkg.productName}`,
+      message: `Are you sure you want to close ${pkg.productName}?`,
+    }, (response) => {
+      if (response === 0) {
+        showExitPrompt = false;
+
+        menubar.app.quit();
+      }
+    });
   });
 
   // First opening should enable auto-launch on login
