@@ -42,7 +42,7 @@ const openPreferencesWindow = () => {
   preferencesWindow = new BrowserWindow({
     width: 250,
     height: 100,
-    // resizable: false,
+    resizable: false,
     minimizable: false,
     maximizable: false,
   });
@@ -77,22 +77,7 @@ const init = async () => {
     return autoLauncher.disable();
   });
 
-  ipcMain.on(EVENTS.QUIT, () => menubar.app.quit());
-
-  settings.set('isDarkMode', osxPrefs.isDarkMode());
-
-  osxPrefs.onDarkModeChanged(() => {
-    menubar.window.setVibrancy(getVibrancy());
-    settings.set('isDarkMode', osxPrefs.isDarkMode());
-  });
-
-  menubar.app.on('before-quit', (event) => {
-    if (!showExitPrompt) {
-      return;
-    }
-
-    event.preventDefault();
-
+  ipcMain.on(EVENTS.QUIT, () => {
     dialog.showMessageBox({
       type: 'question',
       buttons: ['Yes', 'No'],
@@ -105,6 +90,13 @@ const init = async () => {
         menubar.app.quit();
       }
     });
+  });
+
+  settings.set('isDarkMode', osxPrefs.isDarkMode());
+
+  osxPrefs.onDarkModeChanged(() => {
+    menubar.window.setVibrancy(getVibrancy());
+    settings.set('isDarkMode', osxPrefs.isDarkMode());
   });
 
   // First opening should enable auto-launch on login
