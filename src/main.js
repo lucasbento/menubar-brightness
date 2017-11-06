@@ -32,7 +32,6 @@ require('electron-debug')({
 });
 
 let preferencesWindow = null;
-let showExitPrompt = true;
 
 const openPreferencesWindow = () => {
   if (preferencesWindow) {
@@ -86,9 +85,7 @@ const init = async () => {
       message: `Are you sure you want to close ${pkg.productName}?`,
     }, (response) => {
       if (response === 0) {
-        showExitPrompt = false;
-
-        menubar.app.quit();
+        return menubar.app.quit();
       }
     });
   });
