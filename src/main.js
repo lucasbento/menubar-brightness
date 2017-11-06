@@ -26,11 +26,6 @@ const menubar = Menubar({
   vibrancy: getVibrancy(),
 });
 
-// TODO: remove this
-require('electron-debug')({
-  showConsole: true,
-});
-
 let preferencesWindow = null;
 
 const openPreferencesWindow = () => {
