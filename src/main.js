@@ -45,6 +45,7 @@ const openPreferencesWindow = () => {
     resizable: false,
     minimizable: false,
     maximizable: false,
+    show: false,
   });
 
   preferencesWindow.on('close', () => {
