@@ -1,4 +1,4 @@
-import { Tray, ipcMain } from 'electron'; // eslint-disable-line
+import { Tray, ipcMain, BrowserWindow } from 'electron'; // eslint-disable-line
 import AutoLaunch from 'auto-launch';
 import Menubar from 'menubar';
 import path from 'path';
@@ -26,14 +26,35 @@ const menubar = Menubar({
   vibrancy: getVibrancy(),
 });
 
-const init = async () => {
-  settings.set('isDarkMode', osxPrefs.isDarkMode());
+// TODO: remove this
+require('electron-debug')({
+  showConsole: true,
+});
 
-  osxPrefs.onDarkModeChanged(() => {
-    menubar.window.setVibrancy(getVibrancy());
-    settings.set('isDarkMode', osxPrefs.isDarkMode());
+let preferencesWindow = null;
+
+const openPreferencesWindow = () => {
+  if (preferencesWindow) {
+    return preferencesWindow.show();
+  }
+
+  preferencesWindow = new BrowserWindow({
+    width: 250,
+    height: 100,
+    // resizable: false,
+    minimizable: false,
+    maximizable: false,
   });
 
+  preferencesWindow.on('close', () => {
+    preferencesWindow = null;
+  });
+
+  preferencesWindow.loadURL(`file://${__dirname}/renderer/preferences.html`);
+  return preferencesWindow.on('ready-to-show', preferencesWindow.show);
+};
+
+const init = async () => {
   ipcMain.on(EVENTS.REQUEST_INITIAL_VALUE, async (event) => {
     const value = parseValue(await brightness.get(), 'library');
 
@@ -43,10 +64,39 @@ const init = async () => {
   ipcMain.on(EVENTS.CHANGE_VALUE, (event, brightnessValue) =>
     brightness.set(parseValue(brightnessValue)));
 
-  const isAutolauncherEnabled = await autoLauncher.isEnabled();
-  if (!isAutolauncherEnabled) {
-    autoLauncher.enable();
+  ipcMain.on(EVENTS.OPEN_PREFERENCES_WINDOW, () => openPreferencesWindow());
+
+  ipcMain.on(EVENTS.TOGGLE_OPEN_LOGIN, (event, isEnabled) => {
+    if (isEnabled) {
+      settings.set('shouldOpenOnLogin', true);
+      return autoLauncher.enable();
+    }
+
+    settings.set('shouldOpenOnLogin', false);
+    return autoLauncher.disable();
+  });
+
+  ipcMain.on(EVENTS.QUIT, () => menubar.app.quit());
+
+  settings.set('isDarkMode', osxPrefs.isDarkMode());
+
+  osxPrefs.onDarkModeChanged(() => {
+    menubar.window.setVibrancy(getVibrancy());
+    settings.set('isDarkMode', osxPrefs.isDarkMode());
+  });
+
+  // First opening should enable auto-launch on login
+  if (!settings.has('shouldOpenOnLogin')) {
+    const isAutolauncherEnabled = await autoLauncher.isEnabled();
+    if (!isAutolauncherEnabled) {
+      autoLauncher.enable();
+    }
+
+    return settings.set('shouldOpenOnLogin', isAutolauncherEnabled);
   }
+
+  const shouldOpenOnLogin = await autoLauncher.isEnabled();
+  return settings.set('shouldOpenOnLogin', shouldOpenOnLogin);
 };
 
 init();

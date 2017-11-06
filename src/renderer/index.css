@@ -34,7 +34,6 @@ body.dark-mode .noUi-base, body.dark-mode .noUi-target {
 	width: 17px;
 	height: 17px;
 	padding: 0;
-	/* border-color: #606060; /* TODO: show this for dark themes only */
 	box-shadow: none;
 	outline: none;
 	left: -10px;

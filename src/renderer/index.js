@@ -19,6 +19,8 @@ const handleChangeBrightness = (values, handle) => {
   ipcRenderer.send(EVENTS.CHANGE_VALUE, values[handle]);
 };
 
+const openPreferencesWindow = () => ipcRenderer.send(EVENTS.OPEN_PREFERENCES_WINDOW);
+
 const updateSlider = (value) => {
   if (el.noUiSlider) {
     return el.noUiSlider.set(value);
@@ -47,6 +49,9 @@ const init = () => {
   ipcRenderer.on(EVENTS.GET_INITIAL_VALUE, (event, value) => updateSlider(value));
 
   el.addEventListener('input', handleChangeBrightness);
+
+  window.addEventListener('keydown', ({ code, metaKey }) =>
+    (metaKey && code.toLowerCase() === 'comma') && openPreferencesWindow());
 };
 
 init();

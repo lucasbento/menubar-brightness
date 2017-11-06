@@ -1,0 +1,32 @@
+body {
+  background-color: #ECECEC;
+  margin-top: 10px;
+  font-size: 12px;
+}
+
+.checkbox-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  border-width: 1;
+  border-color: red;
+}
+
+.checkbox-container input[type="checkbox"] {
+  outline: none;
+  margin-right: 5px;
+}
+
+.checkbox-container label {
+  font-family: -apple-system, 'Helvetica Neue', Helvetica, sans-serif;
+}
+
+.actions {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
+  margin-top: 20px;
+}
