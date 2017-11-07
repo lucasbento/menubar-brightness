@@ -22,6 +22,7 @@ module.exports = {
     name: 'menubar-brightness',
   },
   electronInstallerDMG: {
+    icon: './src/assets/icon.icns',
     'icon-size': 160,
     background: './src/assets/background.png',
     contents: [
