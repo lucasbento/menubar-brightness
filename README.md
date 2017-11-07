@@ -4,7 +4,7 @@
 
 <h1 align="center">Menubar Brightness</h1>
 <p align="center">
-  MacOS app to change your brightness from the menubar.
+  MacOS app to change the screen brightness on the menubar.
 </p>
 
 <p align="center">
@@ -14,6 +14,11 @@
 ## Installation
 
 [Download the latest release][latest-release] (macOS only)
+
+## Usage
+
+- <kbd>⌘</kbd> + <kbd>,</kbd>: to open the preferences window.
+> On the preferences window you are able to specify whether Menubar Brightness will open on login or not and quit the app.
 
 ## License
 
