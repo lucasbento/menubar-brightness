@@ -5,6 +5,7 @@ import path from 'path';
 import osxPrefs from 'electron-osx-appearance';
 import settings from 'electron-settings';
 import brightness from 'brightness';
+import debug from 'electron-debug';
 
 import pkg from '../package.json';
 import EVENTS from './events';
@@ -51,6 +52,8 @@ const openPreferencesWindow = () => {
 };
 
 const init = async () => {
+  debug();
+
   ipcMain.on(EVENTS.REQUEST_INITIAL_VALUE, async (event) => {
     const value = parseValue(await brightness.get(), 'library');
 
@@ -92,18 +95,20 @@ const init = async () => {
     settings.set('isDarkMode', osxPrefs.isDarkMode());
   });
 
-  // First opening should enable auto-launch on login
-  if (!settings.has('shouldOpenOnLogin')) {
-    const isAutolauncherEnabled = await autoLauncher.isEnabled();
-    if (!isAutolauncherEnabled) {
-      autoLauncher.enable();
+  menubar.app.on('ready', async () => {
+    // First opening should enable auto-launch on login
+    if (!settings.has('shouldOpenOnLogin')) {
+      const isAutolauncherEnabled = await autoLauncher.isEnabled();
+      if (!isAutolauncherEnabled) {
+        autoLauncher.enable();
+      }
+
+      return settings.set('shouldOpenOnLogin', true);
     }
 
-    return settings.set('shouldOpenOnLogin', isAutolauncherEnabled);
-  }
-
-  const shouldOpenOnLogin = await autoLauncher.isEnabled();
-  return settings.set('shouldOpenOnLogin', shouldOpenOnLogin);
+    const shouldOpenOnLogin = await autoLauncher.isEnabled();
+    return settings.set('shouldOpenOnLogin', shouldOpenOnLogin);
+  });
 };
 
 init();
