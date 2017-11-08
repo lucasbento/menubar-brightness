@@ -31,5 +31,11 @@
 
 MIT © [Lucas Bento][github-profile]
 
+---
+
+Thanks to [@wulkano][wulkano]'s [kap] source code.
+
 [latest-release]: https://github.com/lucasbento/menubar-brightness/releases/latest
 [github-profile]: https://github.com/lucasbento
+[wulkano]: https://github.com/wulkano
+[kap]: https://github.com/wulkano/kap
