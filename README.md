@@ -2,7 +2,12 @@
   <img alt="Menubar Brightness" title="Menubar Brightness" src="./media/logo.png" width="250" />
 </p>
 
-<h1 align="center">Menubar Brightness</h1>
+<h1 align="center">
+ Menubar Brightness
+ <a href="https://github.com/airbnb/javascript"><img src="https://img.shields.io/badge/code%20style-airbnb-blue.svg"></a>
+ <a href="https://github.com/lucasbento/menubar-brightness/issues"><img src="https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat"></a>
+</h1>
+
 <p align="center">
   MacOS app to change the screen brightness on the menubar.
 </p>
