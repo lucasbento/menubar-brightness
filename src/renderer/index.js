@@ -28,7 +28,6 @@ const updateSlider = (value) => {
 
   noUiSlider.create(el, {
     start: value,
-    behaviour: 'drag',
     connect: [true, false],
     range: {
       min: 0,
